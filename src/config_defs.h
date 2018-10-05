@@ -38,6 +38,7 @@ enum epd_controller_type {
 enum control_system {
 	BEAGLEBONE_WHITE,
 	BEAGLEBONE_BLACK,
+	BEAGLEBONE_POCKET,
 };
 
 enum driving_board {
