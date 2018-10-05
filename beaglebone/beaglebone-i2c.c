@@ -60,7 +60,7 @@ int beaglebone_i2c_init(uint8_t channel, struct pl_i2c *i2c)
 	if ( ( i2c->priv = open(userlandI2CDevice , O_RDWR, 0 ) ) == -1 )
 	{
 		char errorStr[bufferSize];
-		snprintf(errorStr, bufferSize, "Failed to open userland spi device (%s)\n", userlandI2CDevice);
+		snprintf(errorStr, bufferSize, "Failed to open userland i2c device (%s)\n", userlandI2CDevice);
 		fprintf( stderr,  errorStr);
 		return -EPERM;
 	}
