@@ -44,7 +44,7 @@ static int read_vcom_from_file(const char *filename, int *vcomInMillivolts);
 static int switch_hvs_on(pl_hv_t *p);
 static int switch_hvs_off(pl_hv_t *p);
 
-#define VERBOSE 0
+#define VERBOSE 1
 
 /**
  * allocates memory to hold a pl_generic_epdc structure
@@ -275,6 +275,7 @@ static int epdc_init(struct pl_generic_epdc *p, int load_nvm_content){
 #if 0
 	// load data from display NVM and apply it's settings
 	if (load_nvm_content){
+		LOG("Loading NVM Content");
 		//LOG("%s: load data from display NVM and apply it's settings %i", __func__, p->nvm->nvm_format);
 		if (p->nvm == NULL){
 			LOG("Abort: There's no nvm defined in the EPDC.");
@@ -395,7 +396,8 @@ static int epdc_init(struct pl_generic_epdc *p, int load_nvm_content){
 
 	}
 #else
-	if(do_load_nvm_content(p) || !load_nvm_content){
+	//if(do_load_nvm_content(p) || !load_nvm_content){
+	if(!load_nvm_content){
 		LOG("Loading wflib: %s", controller->waveform_file_path);
 		stat = controller->load_wflib(controller, controller->waveform_file_path);
 #if VERBOSE
