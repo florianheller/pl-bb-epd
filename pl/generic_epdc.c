@@ -119,7 +119,6 @@ int do_load_nvm_content(struct pl_generic_epdc *p){
 		return -ENODATA;
 	}
 	if (p->nvm->nvm_format == NVM_FORMAT_S040){
-
 		// unpack vcom and waveform data from NVM content
 		stat = unpack_nvm_content(buffer, bufferSize);
 #if VERBOSE
@@ -396,8 +395,7 @@ static int epdc_init(struct pl_generic_epdc *p, int load_nvm_content){
 
 	}
 #else
-	//if(do_load_nvm_content(p) || !load_nvm_content){
-	if(!load_nvm_content){
+	if(do_load_nvm_content(p) || !load_nvm_content){
 		LOG("Loading wflib: %s", controller->waveform_file_path);
 		stat = controller->load_wflib(controller, controller->waveform_file_path);
 #if VERBOSE
@@ -625,6 +623,7 @@ static int do_clear_update(struct pl_generic_epdc *p){
  */
 static int unpack_nvm_content(uint8_t *buffer, int bufferSize){
 
+	assert(buffer != NULL);
 	char command[200];
 	const char *filename = "/tmp/dummy.nvm";
 	errno = 0;
